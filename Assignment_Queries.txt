@@ -1,0 +1,35 @@
+create database MySql_Assignment1;
+
+use MySql_Assignment1;
+
+CREATE TABLE Student(
+  Student_ID INT PRIMARY KEY NOT NULL,
+  Name VARCHAR(10),
+  Email VARCHAR(10),
+  dob DATE,
+  advisor_id INT,
+  foreign key (advisor_id) references Advisors(unique_id) on delete set null
+);
+
+CREATE TABLE Advisors(	
+	unique_id INT primary key not null,
+    Name varchar(10),
+    Email varchar(10),
+    specialization varchar(10)
+);
+
+CREATE TABLE Courses(
+	course_code INT Primary Key NOT NULL,
+    title varchar(10),
+    description varchar(10),
+    instructor varchar(10)
+);
+
+Create table Student_Course(
+	Student_id INT,
+    Course_code Int,
+    Enrollment_period INT,
+    primary key (Student_id,Course_code),
+    foreign key (Student_id) references Student(Student_id) on delete cascade,
+    foreign key (Course_code) references Courses(course_code) on delete cascade
+);
