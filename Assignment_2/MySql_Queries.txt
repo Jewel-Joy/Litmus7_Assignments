@@ -1,0 +1,458 @@
+create database Mysql_Assignment2;
+
+use Mysql_Assignment2;
+
+-- Part-1
+
+-- table creation and value insertion
+-- 1
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    City VARCHAR(50),
+    SignupDate DATE
+);
+INSERT INTO Customers VALUES
+(1, 'Alice Johnson', 'alice.johnson@example.com', 'Chennai', '2023-01-15'),
+(2, 'Bob Smith', 'bob.smith@example.com', 'Mumbai', '2023-02-20'),
+(3, 'Charlie Lee', 'charlie.lee@example.com', 'Delhi', '2023-03-10'),
+(4, 'Diana Patel', 'diana.patel@example.com', 'Mumbai', '2023-04-05'),
+(5, 'Evan Thomas', 'evan.thomas@example.com', 'Kochi', '2023-05-18'),
+(6, 'Ali', 'ali.johnson@example.com', 'Mumbai', '2023-01-15');
+
+-- 2
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    TotalAmount DECIMAL(10,2),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) VALUES
+(1001, 1, '2025-06-01', 51.98),
+(1002, 2, '2023-08-02', 9.99),
+(1003, 3, '2025-06-06', 15.75),
+(1004, 4, '2023-05-04', 74.97),
+(1005, 5, '2022-06-05', 25.99);
+
+-- 3
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Category VARCHAR(50),
+    Price DECIMAL(10,2)
+);
+
+INSERT INTO Products VALUES
+(101, 'Wireless Mouse', 'Electronics', 25.99),
+(102, 'Bluetooth Speaker', 'Electronics', 49.99),
+(103, 'Notebook', 'Stationery', 3.49),
+(104, 'Desk Lamp', 'Home', 15.75),
+(105, 'Water Bottle', 'Fitness', 9.99);
+
+-- 4
+CREATE TABLE OrderDetails (
+    OrderDetailID INT PRIMARY KEY,
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    Price DECIMAL(10,2),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, ProductID, Quantity, Price) VALUES
+(1, 1001, 101, 2, 2599),   
+(2, 1002, 105, 1, 999),     
+(3, 1003, 104, 1, 15.75),    
+(4, 1004, 102, 1, 4999),    
+(5, 1004, 103, 5, 300),
+(6, 1005, 101, 2, 5999);
+
+-- Part2
+
+-- Basic Quries
+
+-- 1
+select * from customers;
+
+-- 2
+select * from Orders
+where OrderDate >= CURDATE() - interval 30 day;
+
+-- 3
+select productName,Price from products;
+
+-- 4
+select category,count(productId) from products
+group by category;
+
+-- Filtering and Conditions
+
+-- 5
+select * from customers
+where city='Mumbai';
+
+-- 6
+select * from orderdetails
+where price >=5000;
+
+-- 7
+select * from customers
+where signupdate>= '2024-01-01';
+
+-- Joins
+
+-- 8
+select o.OrderID, o.CustomerID, o.OrderDate, o.TotalAmount,c.name
+from orders o join customers c
+on o.customerid=c.customerid;
+
+-- 9
+select p.productId,p.productname
+from products p join orderdetails o 
+on  p.productId=o.productId;
+
+-- 10
+select c.CustomerID, c.Name
+from Customers c
+left join Orders o ON c.CustomerID = o.CustomerID
+where o.OrderID is null;
+
+-- Aggregation and grouping
+
+-- 11
+select c.CustomerID, c.Name,sum(o.Totalamount)
+from Customers c
+left join Orders o ON c.CustomerID = o.CustomerID
+group by c.customerId;
+
+-- 12
+select p.productname,sum(od.quantity) as TotalQuantity
+from products p join orderdetails od
+on p.productId=od.productId
+group by p.ProductID, p.ProductName
+order by TotalQuantity DESC
+LIMIT 1;
+
+-- 13
+select c.customerid,c.name,avg(o.totalamount) as avg_value
+from customers c join orders o
+on c.customerid=o.customerid
+group by c.customerid;
+
+-- 14
+select p.category,sum(od.price*od.quantity)
+from products p join orderdetails od
+on p.productid=od.productid
+group by p.category;
+
+-- subqueries
+
+-- 15
+select c.customerid,c.name,sum(o.totalamount) as total
+from customers c join orders o
+on c.customerid=o.customerid
+group by customerid
+having total>(select avg(totalamount) from orders);
+
+-- 16
+select p.productid,p.productname
+from products p left join orderdetails o
+on p.productid=o.productid
+where o.productid is null;
+
+-- 17
+select c.customerid,c.name,max(o.orderdate)
+from customers c join orders o
+on c.customerid=o.customerid
+group by c.customerid,c.name;
+
+-- Advanced queries
+
+-- 18
+select c.customerid,c.name,sum(o.totalamount) as Total_Spent
+from customers c join orders o
+on c.customerid=o.customerid
+group by c.customerid,c.name
+order by sum(o.totalamount) desc;
+
+-- 19
+select c.customerid,c.name,count(o.orderid) as Total_count
+from customers c join orders o
+on c.customerid=o.customerid
+group by c.customerid,c.name
+order by count(o.orderid) desc
+limit 3;
+
+-- 20
+select p.ProductID, p.ProductName, COUNT(DISTINCT o.CustomerID) AS UniqueCustomers
+from Products p
+join OrderDetails od on p.ProductID = od.ProductID
+join Orders o on od.OrderID = o.OrderID
+group by p.ProductID, p.ProductName;
+
+
+
+
+
+
+
+
+
+create database Mysql_Assignment2;
+
+use Mysql_Assignment2;
+
+-- Part-1
+
+-- table creation and value insertion
+-- 1
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    City VARCHAR(50),
+    SignupDate DATE
+);
+INSERT INTO Customers VALUES
+(1, 'Alice Johnson', 'alice.johnson@example.com', 'Chennai', '2023-01-15'),
+(2, 'Bob Smith', 'bob.smith@example.com', 'Mumbai', '2023-02-20'),
+(3, 'Charlie Lee', 'charlie.lee@example.com', 'Delhi', '2023-03-10'),
+(4, 'Diana Patel', 'diana.patel@example.com', 'Mumbai', '2023-04-05'),
+(5, 'Evan Thomas', 'evan.thomas@example.com', 'Kochi', '2023-05-18'),
+(6, 'Ali', 'ali.johnson@example.com', 'Mumbai', '2023-01-15');
+
+-- 2
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    TotalAmount DECIMAL(10,2),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) VALUES
+(1001, 1, '2025-06-01', 51.98),
+(1002, 2, '2023-08-02', 9.99),
+(1003, 3, '2025-06-06', 15.75),
+(1004, 4, '2023-05-04', 74.97),
+(1005, 5, '2022-06-05', 25.99);
+
+-- 3
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Category VARCHAR(50),
+    Price DECIMAL(10,2)
+);
+
+INSERT INTO Products VALUES
+(101, 'Wireless Mouse', 'Electronics', 25.99),
+(102, 'Bluetooth Speaker', 'Electronics', 49.99),
+(103, 'Notebook', 'Stationery', 3.49),
+(104, 'Desk Lamp', 'Home', 15.75),
+(105, 'Water Bottle', 'Fitness', 9.99);
+
+-- 4
+CREATE TABLE OrderDetails (
+    OrderDetailID INT PRIMARY KEY,
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    Price DECIMAL(10,2),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, ProductID, Quantity, Price) VALUES
+(1, 1001, 101, 2, 2599),   
+(2, 1002, 105, 1, 999),     
+(3, 1003, 104, 1, 15.75),    
+(4, 1004, 102, 1, 4999),    
+(5, 1004, 103, 5, 300),
+(6, 1005, 101, 2, 5999);
+
+-- Part2
+
+-- Basic Quries
+
+-- 1
+select * from customers;
+
+-- 2
+select * from Orders
+where OrderDate >= CURDATE() - interval 30 day;
+
+-- 3
+select productName,Price from products;
+
+-- 4
+select category,count(productId) from products
+group by category;
+
+-- Filtering and Conditions
+
+-- 5
+select * from customers
+where city='Mumbai';
+
+-- 6
+select * from orderdetails
+where price >=5000;
+
+-- 7
+select * from customers
+where signupdate>= '2024-01-01';
+
+-- Joins
+
+-- 8
+select o.OrderID, o.CustomerID, o.OrderDate, o.TotalAmount,c.name
+from orders o join customers c
+on o.customerid=c.customerid;
+
+-- 9
+select p.productId,p.productname
+from products p join orderdetails o 
+on  p.productId=o.productId;
+
+-- 10
+select c.CustomerID, c.Name
+from Customers c
+left join Orders o ON c.CustomerID = o.CustomerID
+where o.OrderID is null;
+
+-- Aggregation and grouping
+
+-- 11
+select c.CustomerID, c.Name,sum(o.Totalamount)
+from Customers c
+left join Orders o ON c.CustomerID = o.CustomerID
+group by c.customerId;
+
+-- 12
+select p.productname,sum(od.quantity) as TotalQuantity
+from products p join orderdetails od
+on p.productId=od.productId
+group by p.ProductID, p.ProductName
+order by TotalQuantity DESC
+LIMIT 1;
+
+-- 13
+select c.customerid,c.name,avg(o.totalamount) as avg_value
+from customers c join orders o
+on c.customerid=o.customerid
+group by c.customerid;
+
+-- 14
+select p.category,sum(od.price*od.quantity)
+from products p join orderdetails od
+on p.productid=od.productid
+group by p.category;
+
+-- subqueries
+
+-- 15
+select c.customerid,c.name,sum(o.totalamount) as total
+from customers c join orders o
+on c.customerid=o.customerid
+group by customerid
+having total>(select avg(totalamount) from orders);
+
+-- 16
+select p.productid,p.productname
+from products p left join orderdetails o
+on p.productid=o.productid
+where o.productid is null;
+
+-- 17
+select c.customerid,c.name,max(o.orderdate)
+from customers c join orders o
+on c.customerid=o.customerid
+group by c.customerid,c.name;
+
+-- Advanced queries
+
+-- 18
+select c.customerid,c.name,sum(o.totalamount) as Total_Spent
+from customers c join orders o
+on c.customerid=o.customerid
+group by c.customerid,c.name
+order by sum(o.totalamount) desc;
+
+-- 19
+select c.customerid,c.name,count(o.orderid) as Total_count
+from customers c join orders o
+on c.customerid=o.customerid
+group by c.customerid,c.name
+order by count(o.orderid) desc
+limit 3;
+
+-- 20
+select p.ProductID, p.ProductName, COUNT(DISTINCT o.CustomerID) AS UniqueCustomers
+from Products p
+join OrderDetails od on p.ProductID = od.ProductID
+join Orders o on od.OrderID = o.OrderID
+group by p.ProductID, p.ProductName;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
