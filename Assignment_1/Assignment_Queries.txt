@@ -3,33 +3,33 @@ create database MySql_Assignment1;
 use MySql_Assignment1;
 
 CREATE TABLE Student(
-  Student_ID INT PRIMARY KEY NOT NULL,
+  student_id INT PRIMARY KEY NOT NULL,
   Name VARCHAR(10),
-  Email VARCHAR(10),
+  Email VARCHAR(50),
   dob DATE,
   advisor_id INT,
-  foreign key (advisor_id) references Advisors(unique_id) on delete set null
+  foreign key (advisor_id) references Advisor(advisor_id) on delete set null
 );
 
-CREATE TABLE Advisors(	
-	unique_id INT primary key not null,
+CREATE TABLE Advisor(	
+    advisor_id INT primary key not null,
     Name varchar(10),
-    Email varchar(10),
-    specialization varchar(10)
+    Email varchar(50),
+    specialization varchar(50)
 );
 
-CREATE TABLE Courses(
-	course_code INT Primary Key NOT NULL,
-    title varchar(10),
-    description varchar(10),
-    instructor varchar(10)
+CREATE TABLE Course(
+    course_code INT Primary Key NOT NULL,
+    title varchar(50),
+    description varchar(50),
+    instructor varchar(50)
 );
 
-Create table Student_Course(
-	Student_id INT,
+Create table Student_Course_Map(
+    student_id INT,
     Course_code Int,
-    Enrollment_period INT,
-    primary key (Student_id,Course_code),
-    foreign key (Student_id) references Student(Student_id) on delete cascade,
-    foreign key (Course_code) references Courses(course_code) on delete cascade
+    Enrollment_date DATE,
+    primary key (student_id,Course_code),
+    foreign key (student_id) references Student(student_id) on delete cascade,
+    foreign key (Course_code) references Course(course_code) on delete cascade
 );
