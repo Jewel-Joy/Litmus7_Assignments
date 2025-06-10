@@ -27,6 +27,7 @@ CREATE TABLE Order (
     CustomerID INT,
     OrderDate DATE,
     TotalAmount DECIMAL(10,2),
+    CONSTRAINT customer_fk
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
@@ -59,7 +60,9 @@ CREATE TABLE OrderDetail (
     ProductID INT,
     Quantity INT,
     Price DECIMAL(10,2),
+    CONSTRAINT order_fk
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    CONSTRAINT product_fk
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
 
@@ -189,13 +192,10 @@ limit 3;
 
 -- 20
 select p.ProductID, p.ProductName, COUNT(DISTINCT o.CustomerID) AS UniqueCustomers
-<<<<<<< HEAD
 from Products p
 join OrderDetails od on p.ProductID = od.ProductID
-=======
 from Product p
 join OrderDetail od on p.ProductID = od.ProductID
->>>>>>> 8c81202 (made correction)
 join Orders o on od.OrderID = o.OrderID
 group by p.ProductID, p.ProductName;
 

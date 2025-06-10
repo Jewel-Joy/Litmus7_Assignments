@@ -20,7 +20,7 @@ CREATE TABLE Advisor(
 
 CREATE TABLE Course(
     course_code INT Primary Key NOT NULL,
-    title varchar(50),
+    title varchar(50),f
     description varchar(50),
     instructor varchar(50)
 );
