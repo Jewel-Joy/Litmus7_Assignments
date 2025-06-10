@@ -30,6 +30,8 @@ Create table Student_Course_Map(
     Course_code Int,
     Enrollment_date DATE,
     primary key (student_id,Course_code),
+    Constraint student_fk
     foreign key (student_id) references Student(student_id) on delete cascade,
+    Constraint course_fk
     foreign key (Course_code) references Course(course_code) on delete cascade
 );
