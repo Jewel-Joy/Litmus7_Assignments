@@ -19,7 +19,7 @@ public class Student {
 		System.out.println("Enter the name");
 		name = scanner.nextLine();
 		System.out.println("Enter the roll number");
-	    rollNo = scanner.nextInt();
+	      rollNo = scanner.nextInt();
 		System.out.println("Enter the marks of 5 subjects");
 		for (int i = 0; i <= 4; i++) {
 			System.out.println("Subject " + (i + 1) + ":");
