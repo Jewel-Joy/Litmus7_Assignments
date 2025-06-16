@@ -8,7 +8,7 @@ public class Student {
 	private int rollNo;
 	private double marks[] = new double[5];
 	private double total, avg = 0.0;
-	private char grade = ' ';
+	private Grade grade;
 //enum to store grade of student
 	enum Grade{
 		A,B,C,D,F;
@@ -29,7 +29,7 @@ public class Student {
 	//to calculate total marks of student
 	public void calculateTotal() {
 		total = 0;
-		for (int i:marks)
+		for (double i:marks)
 			total += i;
 	}
 //to calculate average marks of student
