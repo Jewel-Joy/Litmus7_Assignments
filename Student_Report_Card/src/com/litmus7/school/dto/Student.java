@@ -2,18 +2,37 @@ package com.litmus7.school.dto;
 
 import java.util.Scanner;
 
-//dto class to store student details
+/**
+ dto class to store student details
+  	
+ */
 public class Student {
 	private String name;
 	private int rollNo;
 	private double marks[] = new double[5];
 	private double total, avg = 0.0;
 	private Grade grade;
-//enum to store grade of student
+/**
+ enum to store grade of student 	
+ */
 	enum Grade{
-		A,B,C,D,F;
+		A("Excellent"),
+		B("Good"),
+		C("Average"),
+		D("Pass"),
+		F("Fail");
+		public String description;
+		Grade(String description) {
+			this.description=description;
+		}
+		public  String getDescription() {
+			return description;
+		}
 	}
-//to input details of student
+/**
+ to input details of student
+  	
+ */
 	public void inputDetails() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the name");
@@ -26,17 +45,26 @@ public class Student {
 			marks[i] = scanner.nextDouble();
 		}
 	}
-	//to calculate total marks of student
+	/**
+	 to calculate total marks of student
+	 
+	 */
 	public void calculateTotal() {
 		total = 0;
 		for (double i:marks)
 			total += i;
-	}
-//to calculate average marks of student
+}
+/**
+ to calculate average marks of student
+ 
+ */
 	public void calculateAverage() {
 		avg = total / 5;
 	}
-//to get grade of student
+/**
+ to get grade of student
+ 
+ */
 	public void getGrade() {
 		if (avg >= 90)
 			grade = Grade.A;
@@ -49,15 +77,17 @@ public class Student {
 		else
 			grade = Grade.F;
 	}
-//to print report card of student
+/**
+ to print report card of student
+  
+ */
 	public void printReportCard() {
 		System.out.println("------REPORT CARD-------");
 		System.out.println("Name :" + name);
 		System.out.println("Roll Number :" + rollNo);
 		System.out.println("Total :" + total);
 		System.out.println("Average :" + avg);
-		System.out.println("Grade :" + grade);
+		System.out.println("Grade :" + grade +" "+ grade.getDescription());
 
 	}
 }
-
