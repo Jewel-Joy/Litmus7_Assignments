@@ -1,7 +1,9 @@
 package com.litmus7.vehicleservice.controller;
 import com.litmus7.vehicleservice.dto.Vehicle;
 import com.litmus7.vehicleservice.dto.VehicleService;
-import com.litmus7.vehicleservice.exception.VehicleException;
+import com.litmus7.vehicleservice.exception.VehicleDataException;
+import com.litmus7.vehicleservice.exception.VehicleServiceException;
+
 import java.util.List;
 /*
  * this class act as the link
@@ -22,7 +24,7 @@ public class VehicleController {
 			return "File is empty";
 		else
 			return "Loaded the data in the file";
-		}catch(VehicleException e) {
+		}catch(VehicleDataException e) {
 			 return "Error: " + e.getMessage();
 		}
 		
@@ -31,14 +33,24 @@ public class VehicleController {
 	 * it displays the vehicle list
 	 */
 	public void displayAllVehicleDetails() {
-		service.displayAllVehicleDetails();
+		try {
+			service.displayAllVehicleDetails();
+		} catch (VehicleServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	/*
 	 * It validate whether the vehicle is added
 	 */
 	public String addVehicles(Vehicle v) {
-		vehicles=service.addVehicles(v);
+		try {
+			vehicles=service.addVehicles(v);
+		} catch (VehicleServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(vehicles.contains(v))
 			return "Vehicle added";
 		else
@@ -52,19 +64,31 @@ public class VehicleController {
 	 * validates whether the vehicle exist or not
 	 */
 	public String vehicleSearch(String brand, String model) {
-		if(service.vehicleSearch(brand, model))
-			return "Vehicle Exist";
-		else
-			return "Vehicle not exist";
+		try {
+			if(service.vehicleSearch(brand, model))
+				return "Vehicle Exist";
+			else
+				return "Vehicle not exist";
+		} catch (VehicleServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "Error occurred while searching for vehicle";
+		}
 		
 		
 	}
 	/*
 	 * calculates the total rent
 	 */
-	public double totalRent() {
+	public double totalRent()  {
 		// TODO Auto-generated method stub
-		return service.totalRent();
+		try {
+			return service.totalRent();
+		} catch (VehicleServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0.0;
+		}
 		}
 
 	

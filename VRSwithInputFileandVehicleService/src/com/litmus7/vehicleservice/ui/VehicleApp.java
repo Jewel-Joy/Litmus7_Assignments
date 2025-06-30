@@ -1,4 +1,4 @@
-package com.litmus7.vehiclservice;
+package com.litmus7.vehicleservice.ui;
 import java.util.Scanner;
 
 import com.litmus7.vehicleservice.controller.VehicleController;

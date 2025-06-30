@@ -10,14 +10,14 @@ import java.util.List;
 import com.litmus7.vehicleservice.dto.Bike;
 import com.litmus7.vehicleservice.dto.Car;
 import com.litmus7.vehicleservice.dto.Vehicle;
-import com.litmus7.vehicleservice.exception.VehicleException;
+import com.litmus7.vehicleservice.exception.VehicleDataException;
 /*
  * DataAccess class access the data from the vehicle.txt
  */
 
 public class DataAccess {
 		List<Vehicle> vehicle=new ArrayList();
-			public List<Vehicle> loadVehicles() throws VehicleException {
+			public List<Vehicle> loadVehicles() throws VehicleDataException {
 			    try {
 			        BufferedReader br = new BufferedReader(new FileReader("src/vehicle.txt"));
 			        String line;
@@ -42,11 +42,11 @@ public class DataAccess {
 			            }
 			        }
 			    } catch (FileNotFoundException e) {
-			        throw new VehicleException("Vehicle file not found.");
+			        throw new VehicleDataException("Vehicle file not found.");
 			    } catch (IOException e) {
-			        throw new VehicleException("Error reading vehicle file.");
+			        throw new VehicleDataException("Error reading vehicle file.");
 			    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-			        throw new VehicleException("Invalid data format in vehicle file.");
+			        throw new VehicleDataException("Invalid data format in vehicle file.");
 			    }
 
 			    return vehicle;
