@@ -1,5 +1,5 @@
 package com.litmus7.vehicleservice.dto;
-import java.util.Scanner;
+
 
 	/*
 	 * This class inherits properties from the Vehicle class
@@ -35,29 +35,20 @@ public class Bike extends Vehicle {
 	}
 	
 	/*
-	 * this method calls the inputDetails() method of the parent class and also accepts
-	 * the value of engine capacity and does the bike has gears
+	 * toString() converts object to string
 	 */
 	
-	public void inputDetails() {
-		Scanner scanner=new Scanner(System.in);
-		System.out.println("----Enter the bike details----");
-		super.inputDetails();
-		System.out.println("Enter the engine capacity");
-		engineCapacity=scanner.nextInt();
-		System.out.println("Does the bike has gears");
-		hasGears=scanner.nextBoolean();
+
+	public String toString() {
+		return "Brand "+brand+"\nModel "+model+"\nRentPerDay "+rentalPricePerDay+"\nEngine Capacity "+engineCapacity+"\nHas gears  "+hasGears;
 	}
+
 	
-	/*
-	 * this method calls the displayDetails() method of the parent class and also
-	 * displays the value of engine capacity and does the bike has gears
-	 */
+
 	
-	public void displayDetails() {
-		System.out.println("----Displaying the bike details----");
-		super.displayDetails();
-		System.out.println("Engine Capacity : "+engineCapacity);
-		System.out.println("Does the bike has gears : "+hasGears);
+	public String displayDetails() {
+		System.out.println("----Displaying the bike details----\n");
+		return this.toString();
+				
 	}
 }

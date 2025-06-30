@@ -1,5 +1,5 @@
 package com.litmus7.vehicleservice.dto;
-import java.util.Scanner;
+
 
 	/**
 	 * This class contains brand,model and rent/day of vehicle.
@@ -32,29 +32,19 @@ public class Vehicle {
 		this.model=model;
 		this.rentalPricePerDay=rentalPricePerDay;
 	}
-	
 	/*
-	 * This method accepts the value of data of the vehicle
+	 * toString() converts object to String
 	 */
 	
-	public void inputDetails() {
-		Scanner scanner=new Scanner(System.in);
-		System.out.println("Enter the brand");
-		brand=scanner.nextLine();
-		System.out.println("Enter the model");
-		model=scanner.nextLine();
-		System.out.println("Enter the rent price per day");
-		rentalPricePerDay=scanner.nextDouble();
-		
+	public String toString() {
+	    return "Brand: " + brand + "\nModel: " + model + "\nRent per day: " + rentalPricePerDay;
 	}
 	
-	/*
-	 * This method accepts the value of data of the vehicle
-	 */
-	
-	public void displayDetails() {
-		System.out.println("Brand : "+brand);
-		System.out.println("Model : "+model);
-		System.out.println("Rent per day : " +rentalPricePerDay);
+	public String displayDetails() {
+	    return this.toString(); 
 	}
+
+
+	
+
 }

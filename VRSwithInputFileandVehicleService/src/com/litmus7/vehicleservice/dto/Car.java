@@ -1,5 +1,5 @@
 package com.litmus7.vehicleservice.dto;
-import java.util.Scanner;
+
 
 	/*
 	 * This class inherits properties from the Vehicle class
@@ -33,31 +33,17 @@ public class Car extends Vehicle {
 		this.isAutomatic=isAutomatic;
 		
 	}
+
 	
 	/*
-	 * this method calls the inputDetails() method of the parent class and also accepts
-	 * the value of number of doors and is the car automatic
+	 * toString() converts object to string
 	 */
-	
-	public void inputDetails() {
-		Scanner scanner=new Scanner(System.in);
-		System.out.println("----Enter the car details----");
-		super.inputDetails();
-		System.out.println("Enter the number of doors");
-		numberOfDoors=scanner.nextInt();
-		System.out.println("Is the car automatic");
-		isAutomatic=scanner.nextBoolean();
+	public String toString() {
+		return "Brand "+brand+"\nModel "+model+"\nRentPerDay "+rentalPricePerDay+"\nNumber of doors "+numberOfDoors+"\nIit Automatic "+isAutomatic;
 	}
 	
-	/*
-	 * this method calls the displayDetails() method of the parent class and also
-	 * displays the value of number of doors and is the car automatic
-	 */
-	
-	public void displayDetails() {
-		System.out.println("----Displaying the car details----");
-		super.displayDetails();
-		System.out.println("Number of Doors : "+numberOfDoors);
-		System.out.println("Is the car automatic : "+isAutomatic);
+	public String displayDetails() {
+		System.out.println("----Displaying the car details----\n");
+		return this.toString();
 	}
 }
