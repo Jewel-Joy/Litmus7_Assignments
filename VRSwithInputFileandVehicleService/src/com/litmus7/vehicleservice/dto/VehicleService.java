@@ -14,14 +14,19 @@ import com.litmus7.vehicleservice.exception.VehicleServiceException;
 	 */
 public class VehicleService {
 	DataAccess data=new DataAccess();
-	List<Vehicle> vehicleList;
+	private List<Vehicle> vehicleList;
 	/*
 	 * loads the vehicle data from vehicle.txt
 	 * adds the vehicles to vehicleList
 	 */
-	public List<Vehicle> loadVehicles() throws VehicleDataException {
+	public List<Vehicle> loadVehicles() throws VehicleServiceException {
 
-		vehicleList=data.loadVehicles();
+		try {
+			vehicleList=data.loadVehicles();
+		} catch (VehicleDataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return vehicleList;
 		
 	}

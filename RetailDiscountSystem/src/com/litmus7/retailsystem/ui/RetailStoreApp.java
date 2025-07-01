@@ -1,12 +1,12 @@
-package com.litmus7.retailsystem;
+package com.litmus7.retailsystem.ui;
 import java.util.Scanner;
 
-import com.litmus7.retailsystem.dto.PremiumCustomer;
-import com.litmus7.retailsystem.dto.RegularCustomer;
-import com.litmus7.retailsystem.dto.WholeSaleCustomer;
+import com.litmus7.retailsystem.controller.RetailSystemController;
+
 public class RetailStoreApp {
 
 	public static void main(String[] args) {
+		RetailSystemController controller=new RetailSystemController();
 		int customerType=0;
 		double totalAmount=0;
 		double payableAmount=0;
@@ -19,22 +19,19 @@ public class RetailStoreApp {
 		case 1:
 			System.out.println("Customer Type:Regular Customer");
 			System.out.println("Original Amount: "+totalAmount);
-			RegularCustomer regular=new RegularCustomer();
-			payableAmount=regular.applyDiscount(totalAmount);
+			payableAmount=controller.regularCustomer(totalAmount);
 			System.out.println("Final Payable Amount: "+payableAmount);
 			break;
 		case 2:
 			System.out.println("Customer Type:Preminum Customer");
 			System.out.println("Original Amount: "+totalAmount);
-			PremiumCustomer premium=new PremiumCustomer();
-			payableAmount=premium.applyDiscount(totalAmount);
+			payableAmount=controller.premiumCustomer(totalAmount);
 			System.out.println("Final Payable Amount: "+payableAmount);
 			break;
 		case 3:
 			System.out.println("Customer Type:WholeSale Customer");
 			System.out.println("Original Amount: "+totalAmount);
-			WholeSaleCustomer wholesale=new WholeSaleCustomer();
-			payableAmount=wholesale.applyDiscount(totalAmount);
+			payableAmount=controller.wholesaleCustomer(totalAmount);
 			System.out.println("Final Payable Amount: "+payableAmount);
 			break;
 		default:

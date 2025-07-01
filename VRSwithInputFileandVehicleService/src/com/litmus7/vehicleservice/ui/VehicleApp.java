@@ -4,6 +4,7 @@ import java.util.Scanner;
 import com.litmus7.vehicleservice.controller.VehicleController;
 import com.litmus7.vehicleservice.dto.Bike;
 import com.litmus7.vehicleservice.dto.Car;
+import com.litmus7.vehicleservice.dto.Response;
 
 
 public class VehicleApp {
@@ -13,7 +14,7 @@ public class VehicleApp {
 		Scanner scanner=new Scanner(System.in);
 		
 		VehicleController controller=new VehicleController();
-		String result=controller.loadVehicles();
+		Response result=controller.loadVehicles();
 		System.out.println(result);
 		
 		System.out.println("-----The vehicles in the list------");
@@ -42,7 +43,7 @@ public class VehicleApp {
 				boolean isAutomatic=scanner.nextBoolean();
 				Car car=new Car(brand,model,rentalPricePerDay,numberOfDoors,isAutomatic);
 				
-				System.out.println(controller.addVehicles(car));
+				System.out.println(controller.addVehicle(car).getResponseMessage());
 			}else {
 				System.out.println("Enter the brand");
 				String brand=scanner.next();
@@ -56,7 +57,7 @@ public class VehicleApp {
 				boolean hasGears=scanner.nextBoolean();
 				Bike bike=new Bike(brand,model,rentalPricePerDay,engineCapacity,hasGears);
 				
-				System.out.println(controller.addVehicles(bike));
+				System.out.println(controller.addVehicle(bike).getResponseMessage());
 			}
 		}
 		else {
@@ -74,15 +75,15 @@ public class VehicleApp {
 			String model=scanner.next();
 		
 			result =controller.vehicleSearch(brand, model);
-			System.out.println(result);
+			System.out.println(result.getResponseMessage());
 		}
 		/*
 		 * To print the total rent
 		 */
 		
-		System.out.println("The total rent of all vehicle is: "+controller.totalRent());
+		System.out.println("The total rent of all vehicle is: "+controller.totalRent().getResponseMessage());
 		
-
+		scanner.close();
 	}
 
 }

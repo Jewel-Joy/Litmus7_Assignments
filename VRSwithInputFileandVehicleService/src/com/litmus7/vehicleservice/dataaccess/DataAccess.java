@@ -16,7 +16,7 @@ import com.litmus7.vehicleservice.exception.VehicleDataException;
  */
 
 public class DataAccess {
-		List<Vehicle> vehicle=new ArrayList();
+		List<Vehicle> vehicle=new ArrayList<>();
 			public List<Vehicle> loadVehicles() throws VehicleDataException {
 			    try {
 			        BufferedReader br = new BufferedReader(new FileReader("src/vehicle.txt"));
@@ -41,6 +41,7 @@ public class DataAccess {
 			                vehicle.add(bike);
 			            }
 			        }
+			        br.close();
 			    } catch (FileNotFoundException e) {
 			        throw new VehicleDataException("Vehicle file not found.");
 			    } catch (IOException e) {
