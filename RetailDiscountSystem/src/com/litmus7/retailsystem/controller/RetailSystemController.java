@@ -1,6 +1,5 @@
 package com.litmus7.retailsystem.controller;
-
-import com.litmus7.retailsystem.dto.PremiumCustomer;
+ import com.litmus7.retailsystem.dto.PremiumCustomer;
 import com.litmus7.retailsystem.dto.RegularCustomer;
 import com.litmus7.retailsystem.dto.WholeSaleCustomer;
 

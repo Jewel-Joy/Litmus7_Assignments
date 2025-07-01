@@ -1,8 +1,6 @@
 package com.litmus7.retailsystem.ui;
 import java.util.Scanner;
-
 import com.litmus7.retailsystem.controller.RetailSystemController;
-
 public class RetailStoreApp {
 
 	public static void main(String[] args) {
@@ -11,7 +9,7 @@ public class RetailStoreApp {
 		double totalAmount=0;
 		double payableAmount=0;
 		Scanner scanner=new Scanner(System.in);
-		System.out.println("Enter customer type (1- Regular, 2- Premium, 3- Wholesale): ");
+		System.out.println("Enter customer type \n 1- Regular \n 2- Premium \n 3- Wholesale: ");
 		customerType=scanner.nextInt();
 		System.out.println("Enter total purchase amount: ");
 		totalAmount=scanner.nextDouble();
@@ -39,6 +37,7 @@ public class RetailStoreApp {
 			
 			
 		}
+		scanner.close();
 
 	}
 
