@@ -12,7 +12,7 @@ public class PremiumCustomer implements Discountable{
 		discount=(10*totalAmount)/100;
 		else
 		discount=(7*totalAmount)/100;
-		System.out.println("The discount applied: "+discount);
+		System.out.println("The discount applied is: "+discount);
 		return totalAmount-discount;
 		
 	}

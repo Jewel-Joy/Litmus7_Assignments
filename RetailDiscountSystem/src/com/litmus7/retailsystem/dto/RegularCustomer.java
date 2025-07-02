@@ -9,7 +9,7 @@ package com.litmus7.retailsystem.dto;
 	 */
 	public double applyDiscount(double totalAmount) {
 		discount=(5*totalAmount)/100;
-		System.out.println("The discount applied: "+discount);
+		System.out.println("The discount applied is: "+discount);
 		return totalAmount-discount;
 	}
 }

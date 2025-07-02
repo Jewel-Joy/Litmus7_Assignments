@@ -12,7 +12,7 @@ public class WholeSaleCustomer implements Discountable{
 		discount=(15*totalAmount)/100;
 		else
 		discount=(10*totalAmount)/100;
-		System.out.println("The discount applied: "+discount);
+		System.out.println("The discount applied is: "+discount);
 		return totalAmount-discount;
 		
 	}
