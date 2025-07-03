@@ -1,12 +1,8 @@
 package com.litmus7.vehicleservice.dto;
-
-import java.util.List;
-
-public class Response {
+public class Response<T> {
 	private int statusCode;
 	private String errorMessage;
-	private String responseMessage;
-	private List<Vehicle> vehicles;
+	private T data;
 	public int getStatusCode() {
 		return statusCode;
 	}
@@ -18,20 +14,17 @@ public class Response {
 	}
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
+	} 
+	public void setData(T data) {
+		this.data=data;
+		
 	}
-	public String getResponseMessage() {
-		return responseMessage;
+	public T getData() {
+		return data;
 	}
-	public void setResponseMessage(String responseMessage) {
-		this.responseMessage = responseMessage;
-	}
-	public List<Vehicle> getVehicles() {
-		return vehicles;
-	}
-	public void setVehicles(List<Vehicle> vehicles) {
-		this.vehicles = vehicles;
-	}
+	
+}
 
 
 	
-}
+

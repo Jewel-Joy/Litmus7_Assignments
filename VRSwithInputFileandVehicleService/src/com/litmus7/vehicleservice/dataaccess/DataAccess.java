@@ -18,8 +18,8 @@ import com.litmus7.vehicleservice.exception.VehicleDataException;
 public class DataAccess {
 		List<Vehicle> vehicle=new ArrayList<>();
 			public List<Vehicle> loadVehicles() throws VehicleDataException {
-			    try {
-			        BufferedReader br = new BufferedReader(new FileReader("src/vehicle.txt"));
+			    try(BufferedReader br = new BufferedReader(new FileReader("src/vehicle.txt"))) {
+			        
 			        String line;
 			        while ((line = br.readLine()) != null) {
 			            String[] parts = line.split(",");

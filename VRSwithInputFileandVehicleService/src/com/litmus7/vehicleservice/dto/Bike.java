@@ -40,7 +40,7 @@ public class Bike extends Vehicle {
 	
 
 	public String toString() {
-		return "Brand "+brand+"\nModel "+model+"\nRentPerDay "+rentalPricePerDay+"\nEngine Capacity "+engineCapacity+"\nHas gears  "+hasGears;
+		return "Brand "+getBrand()+"\nModel "+getModel()+"\nRentPerDay "+getRentalPricePerDay()+"\nEngine Capacity "+engineCapacity+"\nHas gears  "+hasGears;
 	}
 
 	

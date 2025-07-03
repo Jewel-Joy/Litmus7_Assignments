@@ -39,7 +39,7 @@ public class Car extends Vehicle {
 	 * toString() converts object to string
 	 */
 	public String toString() {
-		return "Brand "+brand+"\nModel "+model+"\nRentPerDay "+rentalPricePerDay+"\nNumber of doors "+numberOfDoors+"\nIit Automatic "+isAutomatic;
+		return "Brand "+getBrand()+"\nModel "+getModel()+"\nRentPerDay "+getRentalPricePerDay()+"\nNumber of doors "+numberOfDoors+"\nIit Automatic "+isAutomatic;
 	}
 	
 	public String displayDetails() {

@@ -43,7 +43,7 @@ public class VehicleApp {
 				boolean isAutomatic=scanner.nextBoolean();
 				Car car=new Car(brand,model,rentalPricePerDay,numberOfDoors,isAutomatic);
 				
-				System.out.println(controller.addVehicle(car).getResponseMessage());
+				System.out.println(controller.addVehicle(car).getData());
 			}else {
 				System.out.println("Enter the brand");
 				String brand=scanner.next();
@@ -57,7 +57,7 @@ public class VehicleApp {
 				boolean hasGears=scanner.nextBoolean();
 				Bike bike=new Bike(brand,model,rentalPricePerDay,engineCapacity,hasGears);
 				
-				System.out.println(controller.addVehicle(bike).getResponseMessage());
+				System.out.println(controller.addVehicle(bike).getData());
 			}
 		}
 		else {
@@ -75,13 +75,13 @@ public class VehicleApp {
 			String model=scanner.next();
 		
 			result =controller.vehicleSearch(brand, model);
-			System.out.println(result.getResponseMessage());
+			System.out.println(result.getData());
 		}
 		/*
 		 * To print the total rent
 		 */
 		
-		System.out.println("The total rent of all vehicle is: "+controller.totalRent().getResponseMessage());
+		System.out.println("The total rent of all vehicle is: "+controller.totalRent().getData());
 		
 		scanner.close();
 	}

@@ -6,18 +6,18 @@ package com.litmus7.vehicleservice.dto;
 	 */
 
 public class Vehicle {
-	protected String brand;
-	protected String model;
-	protected double rentalPricePerDay;
+	private String brand;
+	private String model;
+	private double rentalPricePerDay;
 	
 	/**
 	 * default constructor that initializes the data with default values
 	 */
 	
 	public Vehicle() {
-		brand="";
-		model="";
-		rentalPricePerDay=0;
+		setBrand("");
+		setModel("");
+		setRentalPricePerDay(0);
 	}
 	
 	/**
@@ -28,20 +28,44 @@ public class Vehicle {
 	*/
 	
 	public Vehicle(String brand,String model,double rentalPricePerDay) {
-		this.brand=brand;
-		this.model=model;
-		this.rentalPricePerDay=rentalPricePerDay;
+		this.setBrand(brand);
+		this.setModel(model);
+		this.setRentalPricePerDay(rentalPricePerDay);
 	}
 	/*
 	 * toString() converts object to String
 	 */
 	
 	public String toString() {
-	    return "Brand: " + brand + "\nModel: " + model + "\nRent per day: " + rentalPricePerDay;
+	    return "Brand: " + getBrand() + "\nModel: " + getModel() + "\nRent per day: " + getRentalPricePerDay();
 	}
 	
 	public String displayDetails() {
 	    return this.toString(); 
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public double getRentalPricePerDay() {
+		return rentalPricePerDay;
+	}
+
+	public void setRentalPricePerDay(double rentalPricePerDay) {
+		this.rentalPricePerDay = rentalPricePerDay;
 	}
 
 

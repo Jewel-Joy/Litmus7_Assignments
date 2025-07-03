@@ -1,7 +1,8 @@
-package com.litmus7.vehicleservice.dto;
+package com.ltmus7.vehicleservice.service;
 import java.util.List;
 
 import com.litmus7.vehicleservice.dataaccess.DataAccess;
+import com.litmus7.vehicleservice.dto.Vehicle;
 import com.litmus7.vehicleservice.exception.VehicleDataException;
 import com.litmus7.vehicleservice.exception.VehicleServiceException;
 	/*
@@ -69,7 +70,7 @@ public class VehicleService {
         }
 
         for (Vehicle v : vehicleList) {
-            if ((v.brand).equalsIgnoreCase(brand) && (v.model).equalsIgnoreCase(model))
+            if ((v.getBrand()).equalsIgnoreCase(brand) && (v.getModel()).equalsIgnoreCase(model))
                 return true;
         }
 
@@ -85,7 +86,7 @@ public class VehicleService {
 
         double total = 0;
         for (Vehicle v : vehicleList) {
-            total += v.rentalPricePerDay;
+            total += v.getRentalPricePerDay();
         }
 
         return total;
