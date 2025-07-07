@@ -1,4 +1,4 @@
-package com.litmus7.userregistration.service;
+package com.litmus7.userregistration.registration;
 import java.util.Scanner;
 import com.litmus7.userregistration.exception.InvalidAgeException;
 import com.litmus7.userregistration.exception.InvalidEmailException;

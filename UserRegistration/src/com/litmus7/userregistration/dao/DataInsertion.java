@@ -1,14 +1,12 @@
 package com.litmus7.userregistration.dao;
-
 import com.litmus7.userregistration.jdbc.JDBC;
-
 import java.sql.*;
 public class DataInsertion {
-	public String dataInsert(String name,int age,String email,String password) {
-	JDBC jdbc=new JDBC();
-	Connection conn=jdbc.connect();
-	try {
-
+	public String dataInsert(String name,int age,String email,String password) throws SQLException {
+		JDBC jdbc=new JDBC();
+		Connection conn=jdbc.connect();
+		
+	
 		PreparedStatement stmt=conn.prepareStatement("insert into user (name,age,email,password) values (?,?,?,?)");
 		stmt.setString(1,name);
 		stmt.setInt(2,age);
@@ -20,19 +18,7 @@ public class DataInsertion {
 			return "insertion to database is succesfull ";
 		else
 			return "insertion failed";
-		
-			
-		
-		
-	} 
-	catch (SQLException e) {
-		// TODO Auto-generated catch block
-		return "Error :"+e.getMessage();
-	}
-	catch (Exception e) {
-		// TODO Auto-generated catch block
-		return "Error :"+e.getMessage();
-	} 
+	
 	}
 }
 

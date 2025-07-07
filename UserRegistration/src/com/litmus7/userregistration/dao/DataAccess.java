@@ -1,9 +1,7 @@
 package com.litmus7.userregistration.dao;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.litmus7.userregistration.jdbc.JDBC;
 import com.litmus7.userregistration.user.User;
 
@@ -12,15 +10,14 @@ public class DataAccess {
 	private int age;
 	private String email;
 	private String password;
-	public List<User> dataAccess() {
-		List<User> users=new ArrayList<>();
+	public User dataAccess(String Email) throws SQLException {
 		JDBC jdbc=new JDBC();
 		Connection conn=jdbc.connect();
 		User user=null;
 		ResultSet rs;
-		try {
+		
 			Statement stmt=conn.createStatement();
-			rs = stmt.executeQuery("select * from User");
+			rs = stmt.executeQuery("select * from User where email= '"+Email+"'");
 			while(rs.next()) {
 				name=rs.getString("name");
 				age=rs.getInt("age");
@@ -28,15 +25,12 @@ public class DataAccess {
 				password=rs.getNString("password");
 				if(name!=null) {
 				user=new User(name,age,email,password);
-				users.add(user);
+				return user;
 				}
 				
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return users;
+		
+		return user;
 
 	}
 	
