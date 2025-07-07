@@ -6,46 +6,70 @@ import com.litmus7.userregistration.exception.InvalidAgeException;
 import com.litmus7.userregistration.exception.InvalidEmailException;
 import com.litmus7.userregistration.exception.WeakPasswordException;
 import com.litmus7.userregistration.registration.UserRegistration;
+import com.litmus7.userregistration.response.Response;
 import com.litmus7.userregistration.user.User;
 
 public class Controller {
-	UserRegistration user=new UserRegistration();
-	DataInsertion datainsert=new DataInsertion();
-	DataAccess dataaccess=new DataAccess();
 	User u=null;
+	final int ERR_CODE=400;
+	final int SUCCESS_CODE=200;
 	
-	public User registration() {
-	
+	public Response registration() {
+		UserRegistration user=new UserRegistration();
+		Response response=new Response();
+		
 		try {
 				u=user.userRegistration();
-		}catch(InvalidAgeException | InvalidEmailException | WeakPasswordException e) {
-			System.out.println(e.getMessage());
+				
+				response.setResponseMessage("Registration successful");
+				response.setStatusCode(SUCCESS_CODE);
+				
+		}catch(InvalidAgeException e) {
+			response.setErrorMessage("Invalid age limit");
+			response.setStatusCode(ERR_CODE);
 		}
-		catch(Exception e) {
-			System.out.println(e.getMessage());
+		catch(InvalidEmailException  e) {
+			response.setErrorMessage("Invalid email");
+			response.setStatusCode(ERR_CODE);
 		}
-		return u;
+		catch( WeakPasswordException e) {
+			response.setErrorMessage("Weak Passwword");
+			response.setStatusCode(ERR_CODE);
+			
 		}
-	public String dataInsertion() {
-		String data="";
+
+		return response;
+		}
+	public Response dataInsertion() {
+		Response response=new Response();
+		DataInsertion datainsert=new DataInsertion();
 		try {
-			data= datainsert.dataInsert(u.getUsername(), u.getAge(),u.getEmail() , u.getPassword());
+			datainsert.dataInsert(u.getUsername(), u.getAge(),u.getEmail() , u.getPassword());
+			response.setResponseMessage("Succesfully Inserted");
+			response.setStatusCode(SUCCESS_CODE);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
+			response.setErrorMessage("Insertion failed"+ e.getMessage());
+			response.setStatusCode(ERR_CODE);
 		}
-		return data;
+		return response;
 		
 	}
-	public User dataAccess() {
+	public Response dataAccess() {
+		Response response=new Response();
+		DataAccess dataaccess=new DataAccess();
 		User users=null;
 		try {
 			users=dataaccess.dataAccess(u.getEmail());
+			response.setData(users);
+			response.setResponseMessage("Succesfully retrived");
+			response.setStatusCode(SUCCESS_CODE);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			response.setErrorMessage("Retrival  failed"+ e.getMessage());
+			response.setStatusCode(ERR_CODE);
+			
 		}
-		return users; 
+		return response; 
 	}
 	
 }
