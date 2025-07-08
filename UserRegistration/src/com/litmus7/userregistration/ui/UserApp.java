@@ -1,14 +1,12 @@
 package com.litmus7.userregistration.ui;
-import com.litmus7.userregistration.controller.Controller;
-import com.litmus7.userregistration.response.Response;
-import com.litmus7.userregistration.user.User;
+import com.litmus7.userregistration.controller.UserRegistrationController;
+import com.litmus7.userregistration.dto.Response;
+import com.litmus7.userregistration.model.User;
 
-public class UI {
+public class UserApp {
 
     public static void main(String[] args) {
-        Controller controller = new Controller();
-
-        
+    	UserRegistrationController controller = new UserRegistrationController();      
         Response registration = controller.registration();
         if (registration.getStatusCode() == 200) {
             System.out.println(registration.getResponseMessage());

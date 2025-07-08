@@ -1,11 +1,8 @@
 package com.litmus7.userregistration.dao;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.litmus7.userregistration.jdbc.JDBC;
-import com.litmus7.userregistration.user.User;
+import com.litmus7.userregistration.model.User;
 
 public class DataAccess {
 
@@ -13,12 +10,14 @@ public class DataAccess {
     Connection conn = jdbc.connect();
 
     public User dataAccess(String emailInput) throws SQLException {
-        String query = "SELECT * FROM User WHERE email = '" + emailInput + "'";
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
+        String query = "SELECT * FROM User WHERE email = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, emailInput);
+
+        ResultSet rs = pstmt.executeQuery();
         User user = null;
 
-        while (rs.next()) {
+        if (rs.next()) {
             String name = rs.getString("name");
             int age = rs.getInt("age");
             String email = rs.getString("email");
@@ -26,37 +25,27 @@ public class DataAccess {
 
             if (name != null) {
                 user = new User(name, age, email, password);
-                break; // since email is unique, exit after one match
             }
         }
 
         rs.close();
-        stmt.close();
+        pstmt.close();
 
         return user;
     }
 
-    public List<User> duplicateEntry() throws SQLException {
-        String query = "SELECT * FROM User";
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        List<User> users = new ArrayList<>();
+    public boolean duplicateEntry(String emailInput) throws SQLException {
+        String query = "SELECT email FROM User WHERE email = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, emailInput);
 
-        while (rs.next()) {
-            String name = rs.getString("name");
-            int age = rs.getInt("age");
-            String email = rs.getString("email");
-            String password = rs.getString("password");
+        ResultSet rs = pstmt.executeQuery();
 
-            if (name != null) {
-                User user = new User(name, age, email, password);
-                users.add(user);
-            }
-        }
+        boolean isUnique = !rs.next(); 
 
         rs.close();
-        stmt.close();
+        pstmt.close();
 
-        return users;
+        return isUnique;
     }
 }

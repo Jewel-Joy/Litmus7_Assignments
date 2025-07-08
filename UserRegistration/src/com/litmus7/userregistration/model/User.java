@@ -1,4 +1,4 @@
-package com.litmus7.userregistration.user;
+package com.litmus7.userregistration.model;
 
 public class User {
 	

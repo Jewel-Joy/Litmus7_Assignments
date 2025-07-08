@@ -1,6 +1,6 @@
-package com.litmus7.userregistration.response;
+package com.litmus7.userregistration.dto;
 
-import com.litmus7.userregistration.user.User;
+import com.litmus7.userregistration.model.User;
 
 public class Response {
 	int statusCode;

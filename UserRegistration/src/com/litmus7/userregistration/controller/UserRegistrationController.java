@@ -2,23 +2,22 @@ package com.litmus7.userregistration.controller;
 import java.sql.SQLException;
 import com.litmus7.userregistration.dao.DataAccess;
 import com.litmus7.userregistration.dao.DataInsertion;
+import com.litmus7.userregistration.dto.Response;
 import com.litmus7.userregistration.exception.DuplicateEntry;
 import com.litmus7.userregistration.exception.InvalidAgeException;
 import com.litmus7.userregistration.exception.InvalidEmailException;
 import com.litmus7.userregistration.exception.WeakPasswordException;
-import com.litmus7.userregistration.registration.UserRegistration;
-import com.litmus7.userregistration.response.Response;
-import com.litmus7.userregistration.user.User;
+import com.litmus7.userregistration.model.User;
+import com.litmus7.userregistration.service.UserRegistration;
 
-public class Controller {
+public class UserRegistrationController {
 	User u=null;
 	final int ERR_CODE=400;
 	final int SUCCESS_CODE=200;
+	Response response=new Response();
 	
 	public Response registration() {
 		UserRegistration user=new UserRegistration();
-		Response response=new Response();
-		
 		try {
 				u=user.userRegistration();
 				
@@ -51,7 +50,7 @@ public class Controller {
 		return response;
 		}
 	public Response dataInsertion() {
-		Response response=new Response();
+		
 		DataInsertion datainsert=new DataInsertion();
 		try {
 			datainsert.dataInsert(u.getUsername(), u.getAge(),u.getEmail() , u.getPassword());
@@ -66,7 +65,7 @@ public class Controller {
 		
 	}
 	public Response dataAccess() {
-		Response response=new Response();
+	
 		DataAccess dataaccess=new DataAccess();
 		User users=null;
 		try {
