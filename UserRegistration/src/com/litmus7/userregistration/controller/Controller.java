@@ -2,6 +2,7 @@ package com.litmus7.userregistration.controller;
 import java.sql.SQLException;
 import com.litmus7.userregistration.dao.DataAccess;
 import com.litmus7.userregistration.dao.DataInsertion;
+import com.litmus7.userregistration.exception.DuplicateEntry;
 import com.litmus7.userregistration.exception.InvalidAgeException;
 import com.litmus7.userregistration.exception.InvalidEmailException;
 import com.litmus7.userregistration.exception.WeakPasswordException;
@@ -36,6 +37,15 @@ public class Controller {
 			response.setErrorMessage("Weak Passwword");
 			response.setStatusCode(ERR_CODE);
 			
+		}
+		catch( DuplicateEntry e) {
+			response.setErrorMessage("Email already exist");
+			response.setStatusCode(ERR_CODE);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			response.setErrorMessage("Wrong SQL syntax");
+			response.setStatusCode(ERR_CODE);
 		}
 
 		return response;

@@ -1,5 +1,4 @@
 package com.litmus7.userregistration.ui;
-
 import com.litmus7.userregistration.controller.Controller;
 import com.litmus7.userregistration.response.Response;
 import com.litmus7.userregistration.user.User;
