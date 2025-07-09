@@ -1,4 +1,6 @@
 package com.litmus7.userregistration.controller;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import com.litmus7.userregistration.dao.DataAccess;
 import com.litmus7.userregistration.dao.DataInsertion;
@@ -46,6 +48,16 @@ public class UserRegistrationController {
 			response.setErrorMessage("Wrong SQL syntax");
 			response.setStatusCode(ERR_CODE);
 		}
+		 catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				response.setErrorMessage("File not found"+ e.getMessage());
+				response.setStatusCode(ERR_CODE);
+			}
+		 catch (IOException e) {
+				// TODO Auto-generated catch block
+				response.setErrorMessage("Unable to load file"+ e.getMessage());
+				response.setStatusCode(ERR_CODE);
+			}
 
 		return response;
 		}
@@ -61,6 +73,16 @@ public class UserRegistrationController {
 			response.setErrorMessage("Insertion failed"+ e.getMessage());
 			response.setStatusCode(ERR_CODE);
 		}
+		 catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				response.setErrorMessage("File not found"+ e.getMessage());
+				response.setStatusCode(ERR_CODE);
+			}
+		 catch (IOException e) {
+				// TODO Auto-generated catch block
+				response.setErrorMessage("Unable to load file"+ e.getMessage());
+				response.setStatusCode(ERR_CODE);
+			}
 		return response;
 		
 	}
@@ -78,6 +100,16 @@ public class UserRegistrationController {
 			response.setStatusCode(ERR_CODE);
 			
 		}
+		 catch (FileNotFoundException e) {
+				response.setErrorMessage("File not found"+ e.getMessage());
+				response.setStatusCode(ERR_CODE);
+				
+			}
+		 catch (IOException e) {
+				response.setErrorMessage("Unable to load file"+ e.getMessage());
+				response.setStatusCode(ERR_CODE);
+				
+			}
 		return response; 
 	}
 	

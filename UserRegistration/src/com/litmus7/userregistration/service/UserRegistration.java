@@ -1,4 +1,6 @@
 package com.litmus7.userregistration.service;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
 import com.litmus7.userregistration.dao.DataAccess;
@@ -11,7 +13,7 @@ import com.litmus7.userregistration.model.User;
 
 public class UserRegistration {
 
-	public User userRegistration() throws InvalidAgeException,InvalidEmailException,WeakPasswordException, DuplicateEntry, SQLException {
+	public User userRegistration() throws InvalidAgeException,InvalidEmailException,WeakPasswordException, DuplicateEntry, SQLException, FileNotFoundException, IOException {
 		DataAccess data=new DataAccess();
 		Scanner scanner=new Scanner(System.in);
 	try {

@@ -1,5 +1,7 @@
 package com.litmus7.userregistration.dao;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 import com.litmus7.userregistration.jdbc.JDBC;
 import com.litmus7.userregistration.model.User;
@@ -7,11 +9,12 @@ import com.litmus7.userregistration.model.User;
 public class DataAccess {
 
     JDBC jdbc = new JDBC();
-    Connection conn = jdbc.connect();
+    
 
-    public User dataAccess(String emailInput) throws SQLException {
+    public User dataAccess(String emailInput) throws SQLException,FileNotFoundException, IOException {
+    	Connection connection = jdbc.connect();
         String query = "SELECT * FROM User WHERE email = ?";
-        PreparedStatement pstmt = conn.prepareStatement(query);
+        PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.setString(1, emailInput);
 
         ResultSet rs = pstmt.executeQuery();
@@ -34,7 +37,8 @@ public class DataAccess {
         return user;
     }
 
-    public boolean duplicateEntry(String emailInput) throws SQLException {
+    public boolean duplicateEntry(String emailInput) throws SQLException,FileNotFoundException, IOException {
+    	Connection conn = jdbc.connect();
         String query = "SELECT email FROM User WHERE email = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, emailInput);

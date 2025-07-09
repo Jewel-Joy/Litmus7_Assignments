@@ -1,8 +1,11 @@
 package com.litmus7.userregistration.dao;
 import com.litmus7.userregistration.jdbc.JDBC;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 public class DataInsertion {
-	public String dataInsert(String name,int age,String email,String password) throws SQLException {
+	public String dataInsert(String name,int age,String email,String password) throws SQLException, FileNotFoundException, IOException {
 		JDBC jdbc=new JDBC();
 		Connection conn=jdbc.connect();
 		

@@ -8,32 +8,17 @@ public class JDBC {
 	private String url="";
 	private String user="";
 	private String password="";
-	Connection conn;
+	Connection connection;
 	Statement st;
 	
-	public Connection connect() {
+	public Connection connect() throws FileNotFoundException, IOException,SQLException {
 		props=new Properties();
-		try {
-			
-			props.load(new FileInputStream("user.properties"));
-			url=props.getProperty("dburl");
-			user=props.getProperty("user");
-			password=props.getProperty("password");
-			conn=DriverManager.getConnection(url,user,password);
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return conn; 
+		props.load(new FileInputStream("user.properties"));
+		url=props.getProperty("dburl");
+		user=props.getProperty("user");
+		password=props.getProperty("password");
+		connection=DriverManager.getConnection(url,user,password);
+		return connection; 
 		
 	} 
 
